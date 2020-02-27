@@ -3,5 +3,4 @@
 This repository contains the code that accompanies our CVPR 2020 paper
 [Learning Unsupervised Hierarchical Part Decomposition of 3D Objectsfrom a Single RGB Image](https://paschalidoud.github.io/)
 
-![Rotating chair](img/chair.gif)
-![Punching human](img/human_punching.gif)
+![Teaser](img/teaser.png)
