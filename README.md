@@ -6,20 +6,34 @@ This repository contains the code that accompanies our CVPR 2020 paper
 ![Teaser](img/teaser.png)
 
 
-Contribution
-------------
+## Dependencies & Installation
+
+Our codebase has the following dependencies:
+
+- numpy
+- [pyquaternion](http://kieranwynn.github.io/pyquaternion/)
+- [pyyaml](https://pyyaml.org/wiki/PyYAMLDocumentation)
+- [pandas](https://pandas.pydata.org/docs/getting_started/install.html)
+- [torch && torchvision](https://pytorch.org/get-started/locally/)
+- [trimesh](https://github.com/mikedh/trimesh)
+
+For the visualizations, we used [simple-3dviz](http://simple-3dviz.com), which
+is our easy-to-use library for visualizing 3D data using Python and OpenGL.
+
+## Contribution
+
 Contributions such as bug fixes, bug reports, suggestions etc. are more than
 welcome and should be submitted in the form of new issues and/or pull requests
 on Github.
 
-License
--------
-Our code is released under the MIT license which practically allows anyone to do anything with it.
-MIT license found in the LICENSE file.
+## License
 
+Our code is released under the [MIT
+license](https://github.com/angeloskath/LICENSE), which practically allows
+anyone to do anything with it.
 
-Relevant Research
-------------------
+## Relevant Research
+
 Below we list some papers that are relevant to our work.
 
 **Ours:**
@@ -37,3 +51,16 @@ Below we also list some more papers that are more closely related to superquadri
 - Equal-Distance Sampling of Supercllipse Models [pdf](https://pdfs.semanticscholar.org/3e6f/f812b392f9eb70915b3c16e7bfbd57df379d.pdf)
 - Revisiting Superquadric Fitting: A Numerically Stable Formulation [link](https://ieeexplore.ieee.org/document/8128485)
 - Segmentation and Recovery of Superquadric Models using Convolutional Neural Networks [pdf](https://arxiv.org/abs/2001.10504)
+
+## Citation
+
+If you found this work influential or helpful for your research, please consider citing
+
+```
+@Inproceedings{Paschalidou2020CVPR,
+     title = {Learning Unsupervised Hierarchical Part Decomposition of 3D Objects from a Single RGB Image},
+     author = {Paschalidou, Despoina and Luc van Gool and Geiger, Andreas},
+     booktitle = {Proceedings IEEE Conf. on Computer Vision and Pattern Recognition (CVPR)},
+     year = {2020}
+}
+```
