@@ -1,7 +1,7 @@
 ## Learning Unsupervised Hierarchical Part Decomposition of 3D Objects from a Single RGB Image
 
 This repository contains the code that accompanies our CVPR 2020 paper
-[Learning Unsupervised Hierarchical Part Decomposition of 3D Objects from a Single RGB Image](https://paschalidoud.github.io/)
+[Learning Unsupervised Hierarchical Part Decomposition of 3D Objects from a Single RGB Image](https://superquadrics.com/hierarchical-primitives.html)
 
 ![Teaser](img/teaser.png)
 
@@ -10,15 +10,17 @@ This repository contains the code that accompanies our CVPR 2020 paper
 
 Our codebase has the following dependencies:
 
-- numpy
+- [numpy](https://numpy.org/doc/stable/user/install.html)
+- [cython](https://cython.readthedocs.io/en/latest/src/quickstart/build.html)
 - [pyquaternion](http://kieranwynn.github.io/pyquaternion/)
 - [pyyaml](https://pyyaml.org/wiki/PyYAMLDocumentation)
 - [pandas](https://pandas.pydata.org/docs/getting_started/install.html)
 - [torch && torchvision](https://pytorch.org/get-started/locally/)
 - [trimesh](https://github.com/mikedh/trimesh)
 
-For the visualizations, we used [simple-3dviz](http://simple-3dviz.com), which
-is our easy-to-use library for visualizing 3D data using Python and OpenGL.
+For the visualizations, we use [simple-3dviz](http://simple-3dviz.com), which
+is our easy-to-use library for visualizing 3D data using Python and OpenGL and
+[matplotlib](https://matplotlib.org/) for the colormaps.
 
 ## Contribution
 
