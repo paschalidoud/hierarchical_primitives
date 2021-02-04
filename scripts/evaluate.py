@@ -9,19 +9,18 @@ import numpy as np
 from pykdtree.kdtree import KDTree
 import torch
 
-from learnable_primitives.utils.metrics import compute_iou
-from learnable_primitives.primitives import get_implicit_surface
-
 from arguments import add_voxelizer_parameters, add_dataset_parameters
 from training_utils import get_loss_options, load_config
 from utils import voxelizer_shape
 
-from learnable_primitives.common.base import build_dataset
-from learnable_primitives.common.dataset import DatasetWithTags
-from learnable_primitives.networks.base import build_network
-from learnable_primitives.voxelizers import VoxelizerFactory
-from learnable_primitives.utils.progbar import Progbar
-from learnable_primitives.utils.sq_mesh import sq_mesh_from_primitive_params
+from hierarchical_primitives.common.base import build_dataset
+from hierarchical_primitives.common.dataset import DatasetWithTags
+from hierarchical_primitives.networks.base import build_network
+from hierarchical_primitives.primitives import get_implicit_surface
+from hierarchical_primitives.utils.metrics import compute_iou
+from hierarchical_primitives.utils.progbar import Progbar
+from hierarchical_primitives.utils.sq_mesh import sq_mesh_from_primitive_params
+from hierarchical_primitives.voxelizers import VoxelizerFactory
 
 
 class DirLock(object):

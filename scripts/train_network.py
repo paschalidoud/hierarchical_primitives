@@ -17,18 +17,17 @@ import numpy as np
 import torch
 from torch.utils.data import DataLoader
 
-from arguments import add_voxelizer_parameters, \
-    add_dataset_parameters
+from arguments import add_voxelizer_parameters, add_dataset_parameters
 from training_utils import get_loss_options, get_regularizer_options, \
     load_config
 from utils import voxelizer_shape
 
-from learnable_primitives.common.base import build_dataloader, build_dataset
-from learnable_primitives.sample_points_on_primitive import PrimitiveSampler
-from learnable_primitives.networks.base import build_network, train_on_batch, \
+from hierarchical_primitives.common.base import build_dataloader, build_dataset
+from hierarchical_primitives.sample_points_on_primitive import PrimitiveSampler
+from hierarchical_primitives.networks.base import build_network, train_on_batch, \
     optimizer_factory, validate_on_batch
-from learnable_primitives.losses import get_loss
-from learnable_primitives.voxelizers import VoxelizerFactory
+from hierarchical_primitives.losses import get_loss
+from hierarchical_primitives.voxelizers import VoxelizerFactory
 
 from output_logger import get_logger
 

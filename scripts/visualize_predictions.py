@@ -17,7 +17,7 @@ from visualization_utils import scene_init, load_ground_truth, \
     save_renderables_as_ply, visualize_sharpness
 from utils import build_dataloader_and_network_from_args, \
     get_non_overlapping_primitives
-from learnable_primitives.utils.sq_mesh import sq_meshes
+from hierarchical_primitives.utils.sq_mesh import sq_meshes
 
 from simple_3dviz.behaviours import SceneInit
 from simple_3dviz.behaviours.misc import LightToCamera

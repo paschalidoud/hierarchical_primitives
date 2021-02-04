@@ -3,11 +3,11 @@ import os
 
 import numpy as np
 
-from learnable_primitives.common.base import build_dataloader
-from learnable_primitives.networks.base import build_network
-from learnable_primitives.primitives import quaternions_to_rotation_matrices
-from learnable_primitives.voxelizers import VoxelizerFactory
-from learnable_primitives.utils.visualization_utils import points_on_sq_surface
+from hierarchical_primitives.common.base import build_dataloader
+from hierarchical_primitives.networks.base import build_network
+from hierarchical_primitives.primitives import quaternions_to_rotation_matrices
+from hierarchical_primitives.voxelizers import VoxelizerFactory
+from hierarchical_primitives.utils.visualization_utils import points_on_sq_surface
 
 import matplotlib
 matplotlib.use("agg")

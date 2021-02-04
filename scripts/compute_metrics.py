@@ -2,10 +2,10 @@ from torch.utils.data import DataLoader
 
 from evaluate import MeshEvaluator
 
-from learnable_primitives.common.dataset import PointsAndLabels, PointsOnMesh, \
+from hierarchical_primitives.common.dataset import PointsAndLabels, PointsOnMesh, \
     DatasetCollection
-from learnable_primitives.common.model_factory import DatasetBuilder
-from learnable_primitives.primitives import \
+from hierarchical_primitives.common.model_factory import DatasetBuilder
+from hierarchical_primitives.primitives import \
     compute_accuracy_and_recall_from_primitive_params
 
 

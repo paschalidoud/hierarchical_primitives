@@ -8,9 +8,9 @@ from tempfile import NamedTemporaryFile
 import numpy as np
 import torch
 
-from learnable_primitives.utils.filter_sqs import filter_primitives, \
+from hierarchical_primitives.utils.filter_sqs import filter_primitives, \
     primitive_parameters_from_indices, qos_less, volume_larger
-from learnable_primitives.utils.sq_mesh import sq_mesh_from_primitive_params
+from hierarchical_primitives.utils.sq_mesh import sq_mesh_from_primitive_params
 
 from visualization_utils import get_color
 

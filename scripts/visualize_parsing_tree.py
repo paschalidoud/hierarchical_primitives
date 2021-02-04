@@ -5,7 +5,7 @@ import numpy as np
 from pyquaternion import Quaternion
 import torch
 
-from learnable_primitives.utils.filter_sqs import filter_primitives, \
+from hierarchical_primitives.utils.filter_sqs import filter_primitives, \
     primitive_parameters_from_indices, qos_less, volume_larger
 
 from arguments import add_voxelizer_parameters, add_dataset_parameters

@@ -1,7 +1,7 @@
 
 
-from learnable_primitives.utils.progbar import Progbar
-from learnable_primitives.utils.stats_logger import StatsLogger
+from hierarchical_primitives.utils.progbar import Progbar
+from hierarchical_primitives.utils.stats_logger import StatsLogger
 
 
 _REGULARIZERS = {

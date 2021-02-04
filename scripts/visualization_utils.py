@@ -8,9 +8,9 @@ import trimesh
 from simple_3dviz import Mesh
 from simple_3dviz.scripts.mesh_viewer import tab20
 
-from learnable_primitives.networks.primitive_parameters import\
+from hierarhcy_primitives.networks.primitive_parameters import\
     PrimitiveParameters
-from learnable_primitives.utils.filter_sqs import filter_primitives, \
+from hierarchical_primitives.utils.filter_sqs import filter_primitives, \
     qos_less, volume_larger, get_primitives_indices, \
     primitive_parameters_from_indices
 

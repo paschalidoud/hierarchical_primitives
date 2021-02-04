@@ -19,13 +19,13 @@ from evaluate import MeshEvaluator
 from training_utils import get_loss_options, load_config
 from utils import voxelizer_shape
 
-from learnable_primitives.common.base import build_dataset
-from learnable_primitives.common.dataset import DatasetWithTags
-from learnable_primitives.networks.base import build_network
-from learnable_primitives.voxelizers import VoxelizerFactory
-from learnable_primitives.utils.filter_sqs import filter_primitives, \
+from hierarchical_primitives.common.base import build_dataset
+from hierarchical_primitives.common.dataset import DatasetWithTags
+from hierarchical_primitives.networks.base import build_network
+from hierarchical_primitives.voxelizers import VoxelizerFactory
+from hierarchical_primitives.utils.filter_sqs import filter_primitives, \
     primitive_parameters_from_indices, qos_less, volume_larger
-from learnable_primitives.utils.progbar import Progbar
+from hierarchical_primitives.utils.progbar import Progbar
 
 
 def hash_file(filepath):
