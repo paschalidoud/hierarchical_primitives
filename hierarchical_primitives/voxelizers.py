@@ -2,8 +2,6 @@ import numpy as np
 import os
 import uuid
 
-from .utils.pcl_voxelization import get_voxel_grid
-
 import matplotlib
 matplotlib.use("agg")
 import matplotlib.pyplot as plt
@@ -118,26 +116,31 @@ class OccupancyGrid(VoxelizerBase):
         return self.voxelize(gt_mesh)
 
 
-class PrecomputedVoxelizer(VoxelizerBase):
-    """PrecomputedVoxelizer is a wrapper for precomputed data, such as
-       precomputed TSDFs and occupancy grids.
+def get_voxel_grid(bbox, grid_shape):
+    """Given a bounding box and the dimensionality of a grid generate a grid of
+    voxels and return their centers.
+
+    Arguments:
+    ----------
+        bbox: array(shape=(6, 1), dtype=np.float32)
+              The min and max of the corners of the bbox that encloses the
+              scene
+        grid_shape: array(shape(3,), dtype=int32)
+                    The dimensions of the voxel grid used to discretize the
+                    scene
+    Returns:
+    --------
+        voxel_grid: array(shape=(3,)+grid_shape)
+                    The centers of the voxels
     """
-    def __init__(self, name, output_shape):
-        super(PrecomputedVoxelizer, self).__init__(name)
-        self._output_shape = output_shape
+    # Make sure that we have the appropriate inputs
+    assert bbox.shape[0] == 6
+    assert bbox.shape[1] == 1
 
-    @property
-    def output_shape(self):
-        return tuple(self._output_shape)
-
-    def get_X(self, model):
-        raise NotImplementedError()
-
-
-class TSDFPrecomputed(PrecomputedVoxelizer):
-    @property
-    def output_shape(self):
-        return (1,) + tuple(self._output_shape)
-
-    def get_X(self, model):
-        return model.tsdf[np.newaxis]
+    xyz = [
+        np.linspace(s, e, c, endpoint=True, dtype=np.float32)
+        for s, e, c in
+        zip(bbox[:3], bbox[3:], grid_shape)
+    ]
+    bin_size = np.array([xyzi[1]-xyzi[0] for xyzi in xyz]).reshape(3, 1, 1, 1)
+    return np.stack(np.meshgrid(*xyz, indexing="ij")) + bin_size/2
