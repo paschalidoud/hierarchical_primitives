@@ -358,13 +358,12 @@ class DynamicFaust(ModelsCollection):
             if os.path.isdir(os.path.join(self._base_dir, d))
         ])
         mesh_folder = config["data"].get("mesh_folder", "mesh_seq_2")
-        path_to_meshes = os.path.join(self._base_dir, d, mesh_folder)
 
         # Note that we filter out the first 20 meshes from the sequence to
         # "discard" the neutral pose that is used for calibration purposes.
         self._tags = sorted([
-            "{}:{}".format(d, ll[:-4]) for d in self._paths
-            for ll in sorted(os.listdir(path_to_meshes))[20:]
+            "{}:{}".format(d, l[:-4]) for d in self._paths
+            for l in sorted(os.listdir(os.path.join(self._base_dir, d, mesh_folder)))[20:]
             if l.endswith(".obj")
         ])
 

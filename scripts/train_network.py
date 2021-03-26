@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 """Script used to train the network that will be used to learn the parameters
 of M primitives given an image.
 """
@@ -11,23 +10,19 @@ import string
 import subprocess
 import sys
 
-from functools import partial
-
 import numpy as np
 import torch
 from torch.utils.data import DataLoader
 
-from arguments import add_voxelizer_parameters, add_dataset_parameters
+from arguments import add_dataset_parameters
 from training_utils import get_loss_options, get_regularizer_options, \
     load_config
-from utils import voxelizer_shape
 
 from hierarchical_primitives.common.base import build_dataloader, build_dataset
 from hierarchical_primitives.sample_points_on_primitive import PrimitiveSampler
 from hierarchical_primitives.networks.base import build_network, train_on_batch, \
     optimizer_factory, validate_on_batch
 from hierarchical_primitives.losses import get_loss
-from hierarchical_primitives.voxelizers import VoxelizerFactory
 
 from output_logger import get_logger
 
@@ -99,8 +94,8 @@ def main(argv):
         description="Train a network to predict primitives"
     )
     parser.add_argument(
-        "dataset_directory",
-        help="Path to the directory containing the dataset"
+        "config_file",
+        help="Path to the file that contains the experiment configuration"
     )
     parser.add_argument(
         "output_directory",
@@ -110,7 +105,7 @@ def main(argv):
     parser.add_argument(
         "--weight_file",
         default=None,
-        help=("The path to a previously trainined model to continue"
+        help=("The path to a previously trained model to continue"
               " the training from")
     )
     parser.add_argument(
@@ -118,16 +113,6 @@ def main(argv):
         default=0,
         type=int,
         help="Continue training from epoch (default=0)"
-    )
-    parser.add_argument(
-        "--train_test_splits_file",
-        default=None,
-        help="Path to the train-test splits file"
-    )
-    parser.add_argument(
-        "--config_file",
-        default="../config/default.yaml",
-        help="Path to the file that contains the experiment configuration"
     )
     parser.add_argument(
         "--run_on_gpu",
@@ -139,12 +124,6 @@ def main(argv):
         action="store_true",
         help="Optimize only using the probabilities"
     )
-    parser.add_argument(
-        "--transitions_only",
-        action="store_true",
-        help="Optimize only using the transition probabilities"
-    )
-
     parser.add_argument(
         "--experiment_tag",
         default=None,
@@ -178,7 +157,6 @@ def main(argv):
     )
 
     add_dataset_parameters(parser)
-    add_voxelizer_parameters(parser)
     # Parameters related to the loss function and the loss weights
     args = parser.parse_args(argv)
     set_num_threads(1)
@@ -230,20 +208,9 @@ def main(argv):
     n_points_from_sq_mesh = config["data"].get("n_points_from_sq_mesh", 200)
     sampler = PrimitiveSampler(n_points_from_sq_mesh)
 
-    # Create a factory that returns the appropriate voxelizer based on the
-    # input argument
-    voxelizer_factory = VoxelizerFactory(
-        args.voxelizer_factory,
-        np.array(voxelizer_shape(args)),
-        args.save_voxels_to
-    )
     # Instantiate a dataloader to generate the samples for training
     dataloader = build_dataloader(
         config,
-        voxelizer_factory,
-        args.dataset_directory,
-        args.dataset_type,
-        args.train_test_splits_file,
         args.model_tags,
         args.category_tags,
         config["data"].get("train_split", ["train", "val"]),
@@ -254,10 +221,6 @@ def main(argv):
     # Instantiate a dataloader to generate the samples for validation
     val_dataset = build_dataset(
         config,
-        voxelizer_factory,
-        args.dataset_directory,
-        args.dataset_type,
-        args.train_test_splits_file,
         [],
         [],
         config["data"].get("test_split", ["test"]),

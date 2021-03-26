@@ -8,7 +8,7 @@ import matplotlib.pyplot as plt
 from pyquaternion import Quaternion
 import torch
 
-from arguments import add_dataset_parameters, add_voxelizer_parameters
+from arguments import add_dataset_parameters
 from training_utils import load_config
 from utils import build_dataloader_and_network_from_args
 from visualization_utils import scene_init, load_ground_truth, get_color
@@ -136,7 +136,6 @@ if __name__ == "__main__":
     )
 
     add_dataset_parameters(parser)
-    add_voxelizer_parameters(parser)
     args = parser.parse_args()
 
     if args.run_on_gpu and torch.cuda.is_available():

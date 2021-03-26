@@ -14,15 +14,13 @@ from mysql.connector import errorcode
 import numpy as np
 import torch
 
-from arguments import add_dataset_parameters, add_voxelizer_parameters
+from arguments import add_dataset_parameters
 from evaluate import MeshEvaluator
 from training_utils import get_loss_options, load_config
-from utils import voxelizer_shape
 
 from hierarchical_primitives.common.base import build_dataset
 from hierarchical_primitives.common.dataset import DatasetWithTags
 from hierarchical_primitives.networks.base import build_network
-from hierarchical_primitives.voxelizers import VoxelizerFactory
 from hierarchical_primitives.utils.filter_sqs import filter_primitives, \
     primitive_parameters_from_indices, qos_less, volume_larger
 from hierarchical_primitives.utils.progbar import Progbar
@@ -162,7 +160,6 @@ def main(argv):
     )
 
     add_dataset_parameters(parser)
-    add_voxelizer_parameters(parser)
     args = parser.parse_args(argv)
 
     # Get the database connection
@@ -180,16 +177,8 @@ def main(argv):
         int(args.weight_file.split("/")[-1].split("_")[-1])
     )
 
-    # Create a factory that returns the appropriate voxelizer based on the
-    # input argument
-    voxelizer_factory = VoxelizerFactory(
-        args.voxelizer_factory,
-        np.array(voxelizer_shape(args)),
-        args.save_voxels_to
-    )
     dataset = build_dataset(
         config,
-        voxelizer_factory,
         args.dataset_directory,
         args.dataset_type,
         args.train_test_splits_file,

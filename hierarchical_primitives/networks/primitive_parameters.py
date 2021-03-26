@@ -4,16 +4,15 @@ import torch
 class PrimitiveParameters(object):
     """Represents the \lambda_m."""
     def __init__(self, probs, translations, rotations, sizes, shapes,
-                 fit=None, qos=None, sharpness=None):
+                 space_partition=None, fit=None, qos=None, sharpness=None):
         self.probs = probs
         self.translations = translations
         self.rotations = rotations
         self.sizes = sizes
         self.shapes = shapes
-        self.space_partition = space_partition
         self.fit = fit
+        self.space_partition = space_partition
         self.qos = qos
-        self.adjacency = adjacency
         self.sharpness = sharpness
 
     def __getattr__(self, name):

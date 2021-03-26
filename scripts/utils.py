@@ -6,7 +6,6 @@ import numpy as np
 from hierarchical_primitives.common.base import build_dataloader
 from hierarchical_primitives.networks.base import build_network
 from hierarchical_primitives.primitives import quaternions_to_rotation_matrices
-from hierarchical_primitives.voxelizers import VoxelizerFactory
 from hierarchical_primitives.utils.visualization_utils import points_on_sq_surface
 
 import matplotlib
@@ -79,31 +78,10 @@ def get_non_overlapping_primitives(y_hat, active_prims, insidness=0.6):
     return non_overlapping_prims
 
 
-def voxelizer_shape(args):
-    if args.voxelizer_factory == "occupancy_grid":
-        return args.grid_shape
-    elif args.voxelizer_factory == "image":
-        return args.image_shape
-    elif args.voxelizer_factory == "tsdf_grid":
-        return (args.resolution,)*3
-
-
 def build_dataloader_and_network_from_args(args, config, device="cpu"):
-    # Create a factory that returns the appropriate voxelizer based on the
-    # input argument
-    voxelizer_factory = VoxelizerFactory(
-        args.voxelizer_factory,
-        np.array(voxelizer_shape(args)),
-        args.save_voxels_to
-    )
-
     # Create a dataloader instance to generate the samples for training
     dataloader = build_dataloader(
         config,
-        voxelizer_factory,
-        args.dataset_directory,
-        args.dataset_type,
-        args.train_test_splits_file,
         args.model_tags,
         args.category_tags,
         split=["train", "test", "val"],

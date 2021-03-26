@@ -15,16 +15,15 @@ def splits_factory(dataset_type):
 
 def build_dataset(
     config,
-    voxelizer_factory,
-    dataset_directory,
-    dataset_type,
-    train_test_splits_file,
     model_tags,
     category_tags,
     keep_splits,
     random_subset=1.0,
     cache_size=0
 ):
+    dataset_directory = config["data"]["dataset_directory"]
+    dataset_type = config["data"]["dataset_type"]
+    train_test_splits_file = config["data"]["splits_file"]
     # Create a dataset instance to generate the samples for training
     dataset = dataset_factory(
         config["data"]["dataset_factory"],
@@ -37,18 +36,13 @@ def build_dataset(
             .filter_category_tags(category_tags)
             .filter_tags(model_tags)
             .random_subset(random_subset)
-            .build(dataset_directory)),
-        voxelizer_factory
+            .build(dataset_directory))
     )
     return dataset
 
 
 def build_dataloader(
     config,
-    voxelizer_factory,
-    dataset_directory,
-    dataset_type,
-    train_test_splits_file,
     model_tags,
     category_tags,
     split,
@@ -57,13 +51,8 @@ def build_dataloader(
     random_subset=1.0,
     cache_size=0
 ):
-    # Create a dataset instance to generate the samples for training
     dataset = build_dataset(
         config,
-        voxelizer_factory,
-        dataset_directory,
-        dataset_type,
-        train_test_splits_file,
         model_tags,
         category_tags,
         split,

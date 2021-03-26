@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 import argparse
 
 import numpy as np
@@ -8,7 +7,7 @@ import torch
 from hierarchical_primitives.utils.filter_sqs import filter_primitives, \
     primitive_parameters_from_indices, qos_less, volume_larger
 
-from arguments import add_voxelizer_parameters, add_dataset_parameters
+from arguments import add_dataset_parameters
 from training_utils import load_config
 from visualization_utils import scene_init, load_ground_truth, get_color
 from utils import build_dataloader_and_network_from_args
@@ -368,7 +367,6 @@ if __name__ == "__main__":
     )
 
     add_dataset_parameters(parser)
-    add_voxelizer_parameters(parser)
     args = parser.parse_args()
 
     if args.run_on_gpu and torch.cuda.is_available():

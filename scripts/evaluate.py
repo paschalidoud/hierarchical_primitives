@@ -9,9 +9,8 @@ import numpy as np
 from pykdtree.kdtree import KDTree
 import torch
 
-from arguments import add_voxelizer_parameters, add_dataset_parameters
+from arguments import add_dataset_parameters
 from training_utils import get_loss_options, load_config
-from utils import voxelizer_shape
 
 from hierarchical_primitives.common.base import build_dataset
 from hierarchical_primitives.common.dataset import DatasetWithTags
@@ -20,7 +19,6 @@ from hierarchical_primitives.primitives import get_implicit_surface
 from hierarchical_primitives.utils.metrics import compute_iou
 from hierarchical_primitives.utils.progbar import Progbar
 from hierarchical_primitives.utils.sq_mesh import sq_mesh_from_primitive_params
-from hierarchical_primitives.voxelizers import VoxelizerFactory
 
 
 class DirLock(object):
@@ -294,7 +292,6 @@ def main(argv):
     )
 
     add_dataset_parameters(parser)
-    add_voxelizer_parameters(parser)
     args = parser.parse_args(argv)
 
     # Check if output directory exists and if it doesn't create it
@@ -312,16 +309,8 @@ def main(argv):
     network = build_network(args.config_file, args.weight_file, device=device)
     network.eval()
 
-    # Create a factory that returns the appropriate voxelizer based on the
-    # input argument
-    voxelizer_factory = VoxelizerFactory(
-        args.voxelizer_factory,
-        np.array(voxelizer_shape(args)),
-        args.save_voxels_to
-    )
     dataset = build_dataset(
         config,
-        voxelizer_factory,
         args.dataset_directory,
         args.dataset_type,
         args.train_test_splits_file,

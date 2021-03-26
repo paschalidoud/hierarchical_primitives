@@ -59,10 +59,8 @@ def get_install_requirements():
         "cython",
         "Pillow",
         "pyquaternion",
-        "backports.functools_lru_cache",
-        "pygsheets",
-        "matplotlib",
         "pykdtree",
+        "matplotlib",
         "simple-3dviz"
     ]
 

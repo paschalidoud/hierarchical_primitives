@@ -9,7 +9,7 @@ import sys
 
 import torch
 
-from arguments import add_voxelizer_parameters, add_dataset_parameters
+from arguments import  add_dataset_parameters
 from compute_metrics import report_metrics
 from training_utils import load_config
 from visualization_utils import scene_init, load_ground_truth, \
@@ -34,27 +34,17 @@ def main(argv):
         description="Do the forward pass and estimate a set of primitives"
     )
     parser.add_argument(
-        "dataset_directory",
-        help="Path to the directory containing the dataset"
+        "config_file",
+        help="Path to the file that contains the experiment configuration"
     )
     parser.add_argument(
         "output_directory",
         help="Save the output files in that directory"
     )
     parser.add_argument(
-        "train_test_splits_file",
-        default=None,
-        help="Path to the train-test splits file"
-    )
-    parser.add_argument(
         "--weight_file",
         default=None,
         help="The path to the previously trainined model to be used"
-    )
-    parser.add_argument(
-        "--config_file",
-        default="../config/default.yaml",
-        help="Path to the file that contains the experiment configuration"
     )
     parser.add_argument(
         "--run_on_gpu",
@@ -168,7 +158,6 @@ def main(argv):
     )
 
     add_dataset_parameters(parser)
-    add_voxelizer_parameters(parser)
     args = parser.parse_args(argv)
 
     # Check if output directory exists and if it doesn't create it
@@ -254,9 +243,9 @@ def main(argv):
         report_metrics(
             active_primitive_params,
             config,
-            args.dataset_type,
+            config["data"]["dataset_type"],
             args.model_tags,
-            args.dataset_directory
+            config["data"]["dataset_directory"]
         )
         if args.with_post_processing:
             indices = get_non_overlapping_primitives(y_hat, active_prims)

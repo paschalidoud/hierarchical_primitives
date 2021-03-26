@@ -84,5 +84,4 @@ def get_feature_extractor(name, n_primitives, freeze_bn=False):
     return {
         "tulsiani": lambda: TulsianiFeatures(freeze_bn),
         "resnet18": lambda: ResNet18(freeze_bn)
-        )
     }[name]()
