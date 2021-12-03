@@ -302,15 +302,15 @@ class DynamicFaust(ModelsCollection):
             super(DynamicFaust.Model, self).__init__(tag, config)
             self._base_dir = base_dir
             self._category, self._sequence = tag.split(":")
-            self._mesh_folder = config["data"].get("mesh_folder", "mesh_seq_2")
+            self._mesh_folder = config["data"].get("mesh_folder", "mesh_seq")
             self._points_folder = config["data"].get(
-                "points_folder", "points_seq_2"
+                "points_folder", "points_seq"
             )
             self._surface_points_folder = config["data"].get(
-                "surface_points_folder", "surface_points_seq_2"
+                "surface_points_folder", "surface_points_seq"
             )
             self._renderings_folder = config["data"].get(
-                "renderings_folder", "renderings-downsampled_2"
+                "renderings_folder", "renderings-downsampled"
             )
 
         @property
@@ -324,10 +324,7 @@ class DynamicFaust(ModelsCollection):
 
         @property
         def path_to_occupancy_pairs(self):
-            if self._points_folder.endswith("_2"):
-                seq = "{}.npz".format(self._sequence)
-            else:
-                seq = "000{}.npz".format(self._sequence)
+            seq = "{}.npz".format(self._sequence)
             return os.path.join(self._base_dir, self._category,
                                 self._points_folder, seq)
 
@@ -357,7 +354,7 @@ class DynamicFaust(ModelsCollection):
             for d in os.listdir(self._base_dir)
             if os.path.isdir(os.path.join(self._base_dir, d))
         ])
-        mesh_folder = config["data"].get("mesh_folder", "mesh_seq_2")
+        mesh_folder = config["data"].get("mesh_folder", "mesh_seq")
 
         # Note that we filter out the first 20 meshes from the sequence to
         # "discard" the neutral pose that is used for calibration purposes.

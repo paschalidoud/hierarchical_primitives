@@ -9,10 +9,10 @@ data:
     dataset_directory: "/media/paschalidoud/MyData/onet_data/Humans/D-FAUST/"
     splits_file: "../config/d-faust_splits.csv"
     dataset_type: "dynamic_faust"
-    mesh_folder: "mesh_seq_2"
-    points_folder: "points_seq_2"
-    surface_points_folder: "surface_points_seq_2"
-    renderings_folder: "renderings-downsampled_2"
+    mesh_folder: "mesh_seq"
+    points_folder: "points_seq"
+    surface_points_folder: "surface_points_seq"
+    renderings_folder: "renderings-downsampled"
 
 feature_extractor:
     type: resnet18
