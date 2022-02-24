@@ -13,11 +13,11 @@ try:
 except ImportError:
     from yaml import Loader
 
-from learnable_primitives.common.model_factory import DatasetBuilder
-from learnable_primitives.common.base import splits_factory
-from learnable_primitives.external.libmesh import check_mesh_contains
-from learnable_primitives.mesh import Trimesh
-from learnable_primitives.utils.progbar import Progbar
+from hierarchical_primitives.common.model_factory import DatasetBuilder
+from hierarchical_primitives.common.base import splits_factory
+from hierarchical_primitives.external.libmesh import check_mesh_contains
+from hierarchical_primitives.mesh import Trimesh
+from hierarchical_primitives.utils.progbar import Progbar
 
 
 def export_surface_pairs(path_to_mesh_file, N, normalize):
