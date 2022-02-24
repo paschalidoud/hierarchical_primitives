@@ -46,6 +46,12 @@ def get_extensions():
             libraries=["stdc++"],
             include_dirs=[np.get_include()],
             extra_compile_args=["-std=c++11", "-O3"]
+        ),
+        Extension(
+            "hierarchical_primitives.external.libmesh.triangle_hash",
+            sources=["hierarchical_primitives/external/libmesh/triangle_hash.pyx"],
+            include_dirs=[np.get_include()],
+            libraries=["m"]  # Unix-like specific
         )
     ])
 
