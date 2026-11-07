@@ -136,6 +136,6 @@ def build_network(config_file, weight_file, device="cpu"):
     # Check whether there is a weight file provided to continue training from
     if weight_file is not None:
         network.load_state_dict(
-            torch.load(weight_file, map_location=device)
+            torch.load(weight_file, map_location=device, weights_only=True)
         )
     return network
